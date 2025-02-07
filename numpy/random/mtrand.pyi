@@ -643,6 +643,7 @@ class RandomState:
     def permutation(self, x: int) -> NDArray[long]: ...
     @overload
     def permutation(self, x: ArrayLike) -> NDArray[Any]: ...
+    def select(self, items: ArrayLike, *, nsample=None, p=None, size=None, axis=None, out=None) -> NDArray[Any]: ...
 
 _rand: RandomState
 
@@ -681,6 +682,7 @@ random_integers = _rand.random_integers
 random_sample = _rand.random_sample
 rayleigh = _rand.rayleigh
 seed = _rand.seed
+select = _rand.select
 set_state = _rand.set_state
 shuffle = _rand.shuffle
 standard_cauchy = _rand.standard_cauchy

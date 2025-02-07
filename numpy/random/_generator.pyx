@@ -5084,4 +5084,8 @@ def default_rng(seed=None):
     return Generator(PCG64(seed))
 
 
+def select(items, *, nsample=None, p=None, size=None, axis=None, out=None):
+    print("calling select")
+    return []
+
 default_rng.__module__ = "numpy.random"

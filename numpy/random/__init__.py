@@ -10,6 +10,7 @@ Generator
 --------------- ---------------------------------------------------------
 Generator       Class implementing all of the random number distributions
 default_rng     Default constructor for ``Generator``
+select          Vectorized sampling without replacement
 =============== =========================================================
 
 ============================================= ===
@@ -161,6 +162,7 @@ __all__ = [
     'rayleigh',
     'sample',
     'seed',
+    'select',
     'set_state',
     'shuffle',
     'standard_cauchy',

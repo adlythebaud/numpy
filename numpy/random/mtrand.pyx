@@ -4793,6 +4793,7 @@ random = _rand.random
 random_integers = _rand.random_integers
 random_sample = _rand.random_sample
 rayleigh = _rand.rayleigh
+select = _rand.select
 set_state = _rand.set_state
 shuffle = _rand.shuffle
 standard_cauchy = _rand.standard_cauchy
@@ -4941,6 +4942,7 @@ __all__ = [
     'rayleigh',
     'sample',
     'seed',
+    'select',
     'set_bit_generator',
     'set_state',
     'shuffle',

@@ -46,6 +46,7 @@ from .mtrand import (
     rayleigh,
     sample,
     seed,
+    select,
     set_bit_generator,  # noqa: F401
     set_state,
     shuffle,
@@ -100,6 +101,7 @@ __all__ = [
     "rayleigh",
     "sample",
     "seed",
+    "select",
     "set_state",
     "shuffle",
     "standard_cauchy",
