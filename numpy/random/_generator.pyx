@@ -4987,6 +4987,41 @@ cdef class Generator:
         slices[axis] = idx
         return arr[tuple(slices)]
 
+    def core_select(self, items, nsample: int, p):
+        if nsample > len(items):
+            raise ValueError("error, cannot have a sample size greater than size of items")
+        arr = np.zeros(len(items), dtype=bool)
+        res = []
+        for n in range(nsample):
+            selection_made = False
+            while not selection_made:
+                selection = np.random.choice(len(arr), p=p)
+                if not arr[selection]:
+                    res.append(items[selection])
+                    arr[selection] = True
+                    selection_made = True
+        if nsample == 1:
+            return np.int64(res[0])
+        return res
+    def select(self, items, *, nsample=None, p=None, size=None, axis=None, out=None):
+        items = np.asarray(items)
+
+        if not nsample:
+            nsample = 1
+
+        if axis is None:
+            items = items.ravel()
+            if size:
+                return [self.core_select(items, nsample, p) for _ in range(size)]
+            return self.core_select(items, nsample, p)
+
+        items = np.moveaxis(items, axis, 0)
+
+        if size:
+            res = np.array([[self.core_select(subarray, nsample, p) for _ in range(size)] for subarray in items])
+        else:
+            res = np.array([self.core_select(subarray, nsample, p) for subarray in items])
+        return np.moveaxis(res, 0, axis)
 
 @cython.embedsignature(True)
 def default_rng(seed=None):
@@ -5083,9 +5118,5 @@ def default_rng(seed=None):
     # normal.
     return Generator(PCG64(seed))
 
-
-def select(items, *, nsample=None, p=None, size=None, axis=None, out=None):
-    print("calling select")
-    return []
 
 default_rng.__module__ = "numpy.random"

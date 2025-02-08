@@ -4757,6 +4757,7 @@ cdef class RandomState:
         self.shuffle(idx)
         return arr[idx]
 
+
 _rand = RandomState()
 
 beta = _rand.beta

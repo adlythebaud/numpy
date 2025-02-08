@@ -1779,3 +1779,9 @@ class TestSingleEltArrayInput:
 
         res = np.random.select(arr)
         assert type(res) is np.int64
+
+        res = np.random.select(arr, nsample=3, p=[0.1, 0.1, 0.1, 0.0, 0.7], size=8)
+        assert len(res) == 8
+        for val in res:
+            assert len(val) == 3
+            assert np.any(val != 40)
